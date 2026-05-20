@@ -1,0 +1,8 @@
+body { margin: 0; font-family: Arial, sans-serif; background: #f6f8fb; color: #172033; }
+.container { width: min(1100px, 92vw); margin: 32px auto; }
+.hero { background: #172033; color: white; padding: 32px; border-radius: 18px; margin-bottom: 24px; }
+.card { background: white; padding: 24px; border-radius: 18px; box-shadow: 0 10px 30px rgba(20, 30, 50, .08); margin-bottom: 24px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 12px; border-bottom: 1px solid #e6eaf0; text-align: left; }
+th { background: #f0f3f8; }
+pre { white-space: pre-wrap; background: #f8fafc; padding: 16px; border-radius: 12px; }

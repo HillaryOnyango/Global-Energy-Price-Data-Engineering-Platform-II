@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Global Energy Price Platform</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main class="container">
+    <section class="hero">
+      <h1>Global Energy Price Platform</h1>
+      <p>Latest curated prices, 24-hour quality status, and pipeline observability.</p>
+    </section>
+
+    <section class="card">
+      <h2>24-hour Summary</h2>
+      <pre>{{ report | tojson(indent=2) }}</pre>
+    </section>
+
+    <section class="card">
+      <h2>Latest Prices</h2>
+      <table>
+        <thead><tr><th>Country</th><th>Product</th><th>Price</th><th>Currency</th><th>Unit</th><th>Date</th></tr></thead>
+        <tbody>
+          {% for row in prices %}
+          <tr>
+            <td>{{ row.country }}</td><td>{{ row.product_type }}</td><td>{{ row.price }}</td>
+            <td>{{ row.currency }}</td><td>{{ row.unit }}</td><td>{{ row.reporting_date }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

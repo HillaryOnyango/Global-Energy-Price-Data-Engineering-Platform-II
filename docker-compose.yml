@@ -1,0 +1,23 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: energy_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  flask:
+    build: .
+    container_name: energy_flask
+    command: python -m flask_app.app
+    env_file: .env
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/app
+
+volumes:
+  mongo_data:

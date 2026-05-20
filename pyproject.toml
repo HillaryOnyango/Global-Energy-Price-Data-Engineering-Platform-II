@@ -1,0 +1,19 @@
+[project]
+name = "global-energy-price-platform"
+version = "0.1.0"
+description = "Real-time energy market data engineering platform"
+requires-python = ">=3.11"
+
+dependencies = [
+    "pandas",
+    "requests",
+    "pymongo",
+    "python-dotenv",
+    "flask",
+    "apache-airflow",
+    "lxml",
+    "openpyxl",
+    "pydantic",
+    "pytest",
+    "pydantic-settings>=2.14.1",
+]
