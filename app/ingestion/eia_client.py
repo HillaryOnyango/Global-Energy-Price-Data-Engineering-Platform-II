@@ -1,40 +1,61 @@
-from __future__ import annotations
-
-from datetime import datetime, timezone
-from typing import Any
-from uuid import uuid4
-
 import requests
+from datetime import datetime, timezone
 
-from config.settings import settings
+from app.config.settings import settings
 from app.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
+
 class EIAClient:
-    """Small API client for EIA-style JSON endpoints.
+    def __init__(self):
+        self.base_url = settings.EIA_BASE_URL
+        self.api_key = settings.EIA_API_KEY
 
-    Adjust `fetch_prices` endpoint/params after choosing the exact EIA route.
-    The rest of the pipeline expects a list of normalized-ish dictionaries.
-    """
+    def fetch_energy_data(self, endpoint: str, params: dict = None):
+        """
+        Fetch data from the EIA API.
+        """
 
-    def __init__(self, base_url: str | None = None, api_key: str | None = None) -> None:
-        self.base_url = (base_url or settings.energy_api_base_url).rstrip("/")
-        self.api_key = api_key if api_key is not None else settings.energy_api_key
+        if params is None:
+            params = {}
 
-    def fetch_prices(self, product_type: str, frequency: str = "daily") -> dict[str, Any]:
-        batch_id = str(uuid4())
-        endpoint = f"{self.base_url}/energy-prices/{product_type}"
-        params = {"api_key": self.api_key, "frequency": frequency}
-        logger.info("Fetching %s prices from %s", product_type, endpoint)
+        params["api_key"] = self.api_key
 
-        response = requests.get(endpoint, params=params, timeout=settings.api_timeout_seconds)
-        response.raise_for_status()
-        payload = response.json()
+        url = f"{self.base_url}/{endpoint}"
+
+        logger.info(f"Sending request to EIA API: {url}")
+
+        try:
+            response = requests.get(url, params=params, timeout=30)
+
+            response.raise_for_status()
+
+            logger.info(
+                f"Successful API request | Status Code: {response.status_code}"
+            )
+
+            return {
+                "success": True,
+                "status_code": response.status_code,
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+                "data": response.json(),
+            }
+
+        except requests.exceptions.HTTPError as http_error:
+            logger.error(f"HTTP Error: {http_error}")
+
+        except requests.exceptions.ConnectionError as connection_error:
+            logger.error(f"Connection Error: {connection_error}")
+
+        except requests.exceptions.Timeout as timeout_error:
+            logger.error(f"Timeout Error: {timeout_error}")
+
+        except requests.exceptions.RequestException as request_error:
+            logger.error(f"Request Exception: {request_error}")
+
         return {
-            "batch_id": batch_id,
-            "source": settings.source_name,
-            "product_type": product_type,
-            "ingestion_timestamp": datetime.now(timezone.utc).isoformat(),
-            "payload": payload,
+            "success": False,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "data": None,
         }

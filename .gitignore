@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+.venv/
+
+# Environment Variables
+.env
+
+# Airflow
+airflow/logs/
+airflow/airflow.db
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Testing
+.pytest_cache/
+
+# Mongo
+*.bson
+
+# Coverage
+.coverage
+htmlcov/
+
+# Logs
+*.log
