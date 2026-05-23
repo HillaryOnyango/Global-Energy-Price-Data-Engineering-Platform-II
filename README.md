@@ -1,102 +1,103 @@
-# Global Energy Price Data Engineering Platform II
+Global Energy Price Data Engineering Platform II
+Real-Time Energy Market Intelligence Pipeline
+An end-to-end modern data engineering platform that ingests, validates, transforms, orchestrates, and visualizes global energy market data using Python, MongoDB, Apache Airflow 3, Flask, Docker, UV, and Chart.js.
 
-## Real-Time Energy Market Intelligence Pipeline
+Features
+·	Multi-source energy ingestion
+·	ETL / ELT pipeline design
+·	MongoDB raw + curated zones
+·	Data validation & quality monitoring
+·	Apache Airflow orchestration
+·	Flask analytics dashboard
+·	Chart.js visualizations
+·	Docker containerization
+·	Metadata tracking
+·	Production-style architecture
 
-An end-to-end modern data engineering platform that ingests, validates, transforms, orchestrates, and serves global energy market data using Python, MongoDB, Apache Airflow 3, and Flask.
+Clone Repository
+git clone https://github.com/HillaryOnyango/Global-Energy-Price-Data-Engineering-Platform-II.git
 
-This project simulates a production-grade analytics backend for an energy intelligence company that tracks global fuel, electricity, and natural gas prices in near real time.
+cd Global-Energy-Price-Data-Engineering-Platform-II
 
----
 
-# Project Overview
+Install UV
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
-The platform is designed to solve real-world data engineering challenges around:
+Verify installation:
+uv --version
 
-- external API ingestion
-- scalable ETL/ELT workflows
-- schema validation
-- raw vs curated data modeling
-- orchestration and observability
-- metadata tracking
-- analytics delivery
-- operational reliability
 
-The system continuously collects energy pricing datasets from the EIA API, processes and validates records, stores both raw and analytics-ready datasets in MongoDB, orchestrates workflows using Apache Airflow, and exposes reporting through Flask APIs and dashboards.
+Create Virtual Environment
+uv venv
 
----
+Activate:
+source .venv/bin/activate
 
-# Business Problem
 
-Energy prices directly impact:
+Install Dependencies
+uv sync
 
-- inflation trends
-- transportation costs
-- household cost of living
-- manufacturing expenses
-- logistics and supply chains
-- government policy planning
 
-Organizations need reliable answers to questions like:
+Configure Environment Variables
+Create .env
+APP_NAME=Global Energy Price Platform
+APP_ENV=development
+DEBUG=True
 
-- Which countries experienced the highest fuel price increase today?
-- Which regions have abnormal electricity price spikes?
-- Are there stale or duplicate records in the latest ingestion batch?
-- How many records failed quality validation?
-- What was the latest successful pipeline execution?
+EIA_API_KEY=your_eia_api_key
 
-Without a centralized data platform, organizations rely on inconsistent spreadsheets and manual reporting pipelines.
+MONGO_URI=mongodb://localhost:27017
+MONGO_DB_NAME=global_energy_prices
 
-This project solves that by building a reliable, observable, and scalable modern data platform.
+LOG_LEVEL=INFO
 
----
 
-# High-Level Architecture
+Run MongoDB Using Docker
+docker pull mongo
 
-```text
-                    ┌────────────────────┐
-                    │    EIA API         │
-                    │ External Data Src  │
-                    └─────────┬──────────┘
-                              │
-                              ▼
-                    ┌────────────────────┐
-                    │ Ingestion Layer    │
-                    │ API Client         │
-                    │ Metadata Capture   │
-                    └─────────┬──────────┘
-                              │
-                              ▼
-                    ┌────────────────────┐
-                    │ Raw Data Zone      │
-                    │ MongoDB Raw Store  │
-                    └─────────┬──────────┘
-                              │
-                              ▼
-                    ┌────────────────────┐
-                    │ Validation Layer   │
-                    │ Quality Checks     │
-                    └─────────┬──────────┘
-                              │
-                              ▼
-                    ┌────────────────────┐
-                    │ Transformation     │
-                    │ Standardization    │
-                    └─────────┬──────────┘
-                              │
-                              ▼
-                    ┌────────────────────┐
-                    │ Curated Data Zone  │
-                    │ Analytics Ready    │
-                    └─────────┬──────────┘
-                              │
-                              ▼
-                    ┌────────────────────┐
-                    │ Apache Airflow 3   │
-                    │ Orchestration      │
-                    └─────────┬──────────┘
-                              │
-                              ▼
-                    ┌────────────────────┐
-                    │ Flask API          │
-                    │ Dashboard          │
-                    └────────────────────┘
+docker run -d   --name global-energy-mongodb   -p 27017:27017   mongo
+
+Verify:
+docker ps
+
+
+Run ETL Pipeline
+uv run python -m app.pipeline
+
+
+Run Flask Dashboard
+PYTHONPATH=. uv run python -m flask --app flask_app.app run
+
+Open:
+http://127.0.0.1:5000
+
+
+Query MongoDB
+docker exec -it global-energy-mongodb mongosh
+
+use global_energy_prices
+
+show collections
+
+
+Dashboard Includes
+·	Fuel price visualization
+·	Natural gas visualization
+·	Electricity visualization
+·	Pipeline monitoring
+·	Data quality metrics
+·	Regional analytics
+
+Technology Stack
+Layer	Technology
+Language	Python 3.12
+Database	MongoDB
+Workflow	Apache Airflow 3
+Backend	Flask
+Visualization	Chart.js
+Containerization	Docker
+Package Manager	UV
+
+
+Author
+Hillary Onyango
