@@ -295,6 +295,15 @@ Open in browser: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 ---
 
+
+<img width="1171" height="583" alt="image" src="https://github.com/user-attachments/assets/1b800784-1c09-4c3e-914f-85d554700624" />
+
+
+<img width="1035" height="845" alt="image" src="https://github.com/user-attachments/assets/2ffbd60f-b766-45d7-a454-5b8916d62c64" />
+
+<img width="1035" height="845" alt="image" src="https://github.com/user-attachments/assets/481237a4-ce27-4101-bdea-14a5b26d1761" />
+
+
 ## Query MongoDB
 
 Access MongoDB shell:
