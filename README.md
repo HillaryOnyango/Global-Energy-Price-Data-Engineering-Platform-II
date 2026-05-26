@@ -303,6 +303,9 @@ Open in browser: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 <img width="1035" height="845" alt="image" src="https://github.com/user-attachments/assets/481237a4-ce27-4101-bdea-14a5b26d1761" />
 
+<img width="1077" height="941" alt="image" src="https://github.com/user-attachments/assets/19013f09-97bd-41d8-a53e-5b1c89b1c461" />
+
+
 
 ## Query MongoDB
 
